@@ -26,19 +26,27 @@ $ make
 ```
 
 ## Run
-The training 
+First, to fit our model to a corpus, run
 ```
-$ ./segmentating_embedding.sh
+$ bash ./train.sh 
 ```
+and specify the input/output by changing the following variables at the begining of the script
+* ```TEXT```: the input text file
+* ```MODEL```: the path to store the model
+
+Then, query a specific set of documents, run
+```
+$ bash ./test.sh 
+```
+and specify the input/output by changing the following variables at the begining of the script
+* ```TEXT```: the input text file
+* ```CATEGORY_SEEDCONCEPTS```: one or more set of concepts to query
+* ```MODEL```: the path for the stored model you wish to use
+
 
 ## Input Format
-The input should be a text file with one document per line. 
-
-For multiple files, we provide a python file `concatFiles.py` for concatenating them into one file.
-
-The usage of concatFiles.py is `python concatFiles.py input_dir output_file`.
-
-Since Segphrase parser uses square brackets to identify phrases in the segmented text, these brackets should be cleaned from input files to avoid misidentification. Besides, Segphrase will fail to automatically generate label if the dataset is too small.
+The input files specified by ```TEXT``` for both ```train.sh``` and ```test.sh``` should be one document per line. 
+The input file ```CATEGORY_SEEDCONCEPTS``` should have each line following the format ```[category name]\t[concept1],[concept2],[concept3]...```, and can contain one or more lines.
 
 ## Output Format
 The output  consists of
