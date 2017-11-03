@@ -48,13 +48,13 @@ file_concept_label = './tmp/file_concept_label'
 
 file_wordvec = file+'.wordvec'
 
-if len(sys.argv) > 2:
-    file = sys.argv[2]
+if len(sys.argv) > 4:
+    file = sys.argv[4]
 
 file_tfidf = file+'.tfidf'
 
-if len(sys.argv) > 3:
-    file = sys.argv[3]
+if len(sys.argv) > 5:
+    file = sys.argv[5]
 
 
 tsvin = csv.reader(open(category_seedConcepts_file), delimiter='\t')
@@ -69,7 +69,7 @@ def get_concept_label_PPR():
     model_concepts = word2vec.Word2Vec.load(file_wordvec)
 
     ind2label_concepts = model_concepts.wv.index2word
-    label2ind_concepts = reverseDict({k:v for k,v in enumerate(ind2label_concepts)})
+    label2ind_concepts = reverseDict({k: v for k, v in enumerate(ind2label_concepts)})
 
     def getConceptIDs(seed_concepts, label2ind_concepts):
         l = [label2ind_concepts.get('<phrase>%s</phrase>' % w, label2ind_concepts.get(w)) for w in seed_concepts]
@@ -79,7 +79,7 @@ def get_concept_label_PPR():
     seed_concepts_set = set([ind2label_concepts[i] for i in flatten(seed_conceptsAsIds)])
 
     ind2label_concepts = [w for w in ind2label_concepts if '_' in w or w in seed_concepts_set]
-    label2ind_concepts = reverseDict({k:v for k,v in enumerate(ind2label_concepts)})
+    label2ind_concepts = reverseDict({k: v for k, v in enumerate(ind2label_concepts)})
     seed_conceptsAsIds = [getConceptIDs(seed_concepts, label2ind_concepts) for seed_concepts in seed_concepts_list]
     seed_concept_sets = [set([ind2label_concepts[i] for i in seed_conceptsAsId]) for seed_conceptsAsId in seed_conceptsAsIds]
     seed_concept_set = set(flatten(seed_concept_sets))
@@ -210,7 +210,6 @@ def categorize_documents():
 
 
 if __name__ == '__main__':
-    # import ipdb; ipdb.set_trace()
     if int(USE_CONCEPT_GRAPH):
         get_concept_label_PPR()
     else:

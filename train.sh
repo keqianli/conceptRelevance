@@ -1,7 +1,7 @@
-export TEXT=../data/signal_processing__oneDocPerLine.txt
-export MODEL='ARL'
+TEXT=../data/signal_processing__oneDocPerLine.txt
+MODEL='ARL'
 
-source conf.d/bashConfig.sh
+source conf.d/autoPhrase.sh
 
 export RAW_TRAIN=$TEXT
 cd ../AutoPhrase/
