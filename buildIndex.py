@@ -15,12 +15,12 @@ if len(sys.argv) > 1:
 file_wordvec = file+'.wordvec'
 
 if len(sys.argv) > 2:
-    file = sys.argv[2]
+    file_wordvec = sys.argv[2]
 
 file_tfidf = file+'.tfidf'
 
 if len(sys.argv) > 3:
-    file = sys.argv[3]
+    file_tfidf = sys.argv[3]
 
 
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
